@@ -6,6 +6,9 @@
   if(isset($_POST['add_imf'])){
     $return_msg=$objCrudAdmin->add_data($_POST);
   }
+
+  $students=$objCrudAdmin->display_data();
+
 ?>
 
 
@@ -54,16 +57,18 @@
         </thead>
 
         <tbody>
+          <?php while($student=mysqli_fetch_assoc($students)){?>
           <tr>
-            <td>1</td>
-            <td>Nakib</td>
-            <td>23</td>
-            <td></td>
+            <td><?php echo $student['ID']?></td>
+            <td><?php echo $student['Name']?></td>
+            <td><?php echo $student['Roll']?></td>
+            <td><img style="height: 100px;" src="upload/<?php echo $student['Image']?>" alt=""></td>
             <td>
-              <a class="btn btn-success" href="#">Edit</a>
+              <a class="btn btn-success" href="edit.php?status=edit&&id=<?php echo $student['ID']?>">Edit</a>
               <a class="btn btn-warning" href="#">Delete</a>
             </td>
           </tr>
+          <?php }?>
         </tbody>
       </table>
     </div>

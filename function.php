@@ -28,6 +28,41 @@
                 return "Information added Succesfully";
             }
         }
+
+        public function display_data(){
+            $query="SELECT * FROM students";
+
+            if(mysqli_query($this->conn,$query)){
+                $return_data=mysqli_query($this->conn,$query);
+
+                return $return_data;
+            }
+        }
+
+        public function display_data_by_id($id){
+            $query="SELECT * FROM students WHERE id=$id";
+
+            if(mysqli_query($this->conn,$query)){
+                $return_data=mysqli_query($this->conn,$query);
+
+                $studentData=mysqli_fetch_assoc($return_data);
+                return $studentData;
+            }
+        }
+        public function updateData($data){
+            $std_name=$data['anothername'];
+            $std_roll=$data['anotherroll'];
+            $std_id=$data['std_id'];
+            $std_img=$_FILES['anotherimage']['name'];
+            $tmp_name=$_FILES['anotherimage']['tmp_name'];
+
+            $query="UPDATE students SET Name='$std_name',Roll='$std_roll',Image='$std_img' WHERE id=$std_id";
+
+            if(mysqli_query($this->conn,$query)){
+                move_uploaded_file($tmp_name,'upload/'.$std_img);
+                return "Information Updated Successfully";
+            }
+        }
     }
 
     
