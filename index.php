@@ -1,3 +1,14 @@
+<?php
+  include("function.php");
+
+  $objCrudAdmin=new crudApp();
+
+  if(isset($_POST['add_imf'])){
+    $return_msg=$objCrudAdmin->add_data($_POST);
+  }
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,6 +27,7 @@
       <h2><a style="text-decoration: none;" href="index.php">Student DataBase</a></h2>
 
       <form class="form" action="" method="POST" enctype="multipart/form-data">
+        <?php if(isset($return_msg)){echo $return_msg;}?>
         <input class="form-control mb-2" type="text" name="name" placeholder="Enter Your Name">
 
         <input class="form-control mb-2" type="number" name="roll" placeholder="Enter Your Roll">
@@ -24,7 +36,7 @@
         <input class="form-control mb-2" type="file" name="image">
 
 
-        <input class="form-control bg-warning" type="submit" value="Add Image" name="add_img">
+        <input class="form-control bg-warning" type="submit" value="Add Information" name="add_imf">
 
       </form>
     </div>
